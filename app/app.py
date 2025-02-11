@@ -4,15 +4,17 @@ from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import json
 import os
+from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
 
 # Google Sheets API Setup
-GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
-creds_dict = json.loads(GOOGLE_CREDENTIALS)
+GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS_PATH")
 SCOPE = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-CREDS = ServiceAccountCredentials.from_json_keyfile_name(creds_dict, SCOPE)
+CREDS = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_CREDENTIALS, SCOPE)
 client = gspread.authorize(CREDS)
 
 # Open the Google Sheet (Replace with your Sheet name)
