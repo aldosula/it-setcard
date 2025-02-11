@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.Name }} - Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="fifa-card">
+        <div class="card-header">
+            <h1>{{ profile.Name }}</h1>
+            <h3>Overall Rating: <span class="rating">{{ profile["Overall Rating"] }}</span></h3>
+        </div>
+        <div class="stats">
+            {% for key, value in profile.items() %}
+                {% if key not in ["Name", "Overall Rating"] %}
+                    <div class="stat-row">
+                        <span class="stat-name">{{ key }}</span>
+                        <span class="stat-value">{{ value }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <a href="/" class="back-button">Back to List</a>
+    </div>
+</body>
+</html>
